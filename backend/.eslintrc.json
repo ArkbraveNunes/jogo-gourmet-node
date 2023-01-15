@@ -1,0 +1,33 @@
+{
+    "env": {
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": ["airbnb-base", "prettier", "eslint:recommended"],
+    "plugins": ["prettier"],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "ignorePatterns": ["**/*.spec.js", "**/*.mock.js", "dist", "node_modules"],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true,
+        "experimentalObjectRestSpread": true
+      }
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "overrides": [
+      {
+        "files": "",
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  }
