@@ -13,7 +13,6 @@
       }
     ],
     "schemes": [
-      "https",
       "http"
     ],
     "consumes": [
