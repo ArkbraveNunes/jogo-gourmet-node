@@ -1,0 +1,379 @@
+{
+    "swagger": "2.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Gourmet Game API"
+    },
+    "host": "localhost:3001",
+    "basePath": "/gourmet-game",
+    "tags": [
+      {
+        "name": "Root",
+        "description": "Default's API Route"
+      }
+    ],
+    "schemes": [
+      "https",
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+      "basicAuth": {
+        "type": "basic"
+      }
+    },
+    "security": [
+      {
+        "basicAuth": []
+      }
+    ],
+    "paths": {
+      "/": {
+        "get": {
+          "tags": [
+            "Root"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Root"
+              }
+            }
+          }
+        }
+      },
+      "/v1/foods": {
+        "get": {
+          "tags": [
+            "Food"
+          ],
+          "summary": "Serviço que efetua a busca de todas as comidas no database",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/FoodSchemaReturnList"
+              }
+            },
+            "204": {
+              "description": "Sem conteúdo"
+            },
+            "400": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            },
+            "500": {
+              "description": "Erro interno",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            }
+          }
+        }
+      },
+      "/v1/food": {
+        "get": {
+          "tags": [
+            "Food"
+          ],
+          "summary": "Serviço que efetua a busca de uma food especifica.",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "skip",
+              "description": "Skip items",
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "type",
+              "description": "Type identifier",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/FoodSchemaReturnOneItem"
+                }
+              }
+            },
+            "204": {
+              "description": "Sem conteúdo"
+            },
+            "400": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            },
+            "500": {
+              "description": "Erro interno",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Food"
+          ],
+          "summary": "Serviço que efetua o cadastro de um comida no banco.",
+          "parameters": [
+            {
+              "in": "body",
+              "schema": {
+                "$ref": "#/definitions/FoodSchemaBody"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/FoodSchemaReturnOneItem"
+              }
+            },
+            "400": {
+              "description": "Requisição inválida",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            },
+            "500": {
+              "description": "Erro interno",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            }
+          }
+        }
+      },
+      "/v1/types": {
+        "get": {
+          "tags": [
+            "Type"
+          ],
+          "summary": "Serviço que efetua a busca de todos os Types cadastrados no database",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/TypeSchemaReturnList"
+              }
+            },
+            "204": {
+              "description": "Sem conteúdo"
+            },
+            "400": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            },
+            "500": {
+              "description": "Erro interno",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            }
+          }
+        }
+      },
+      "/v1/type": {
+        "get": {
+          "tags": [
+            "Type"
+          ],
+          "summary": "Serviço que efetua a busca de um Type cadastrado no database",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "skip",
+              "description": "Skip items",
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "type",
+              "description": "Type identifier",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/TypeSchemaReturnOneItem"
+                }
+              }
+            },
+            "204": {
+              "description": "Sem conteúdo"
+            },
+            "400": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            },
+            "500": {
+              "description": "Erro interno",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Type"
+          ],
+          "summary": "Serviço que efetua o cadastro de um novo type no database.",
+          "parameters": [
+            {
+              "in": "body",
+              "schema": {
+                "$ref": "#/definitions/TypeSchemaBody"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/TypeSchemaReturnOneItem"
+              }
+            },
+            "400": {
+              "description": "Requisição inválida",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            },
+            "500": {
+              "description": "Erro interno",
+              "schema": {
+                "$ref": "#/definitions/DefaultBoomResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Root": {
+        "properties": {
+          "core": {
+            "type": "string",
+            "example": "API Gourmet Game"
+          },
+          "version": {
+            "type": "string",
+            "example": "v1"
+          },
+          "date": {
+            "type": "string",
+            "example": "2020-01-24T17:58:56.673Z"
+          }
+        }
+      },
+      "DefaultBoomResponse": {
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 206
+          },
+          "error": {
+            "type": "string",
+            "example": "foo"
+          },
+          "message": {
+            "type": "string",
+            "example": "bar"
+          }
+        }
+      },
+      "FoodSchemaReturnList": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "food": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "FoodSchemaReturnOneItem": {
+        "type": "object",
+        "properties": {
+          "food": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "FoodSchemaBody": {
+        "type": "object",
+        "properties": {
+          "food": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "TypeSchemaReturnList": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TypeSchemaReturnOneItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "TypeSchemaBody": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
